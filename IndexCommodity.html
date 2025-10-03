@@ -1,0 +1,935 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Product Categories</title>\
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">\
+    <style>\
+        * \{\
+            margin: 0;\
+            padding: 0;\
+            box-sizing: border-box;\
+        \}\
+        \
+        body \{\
+            font-family: 'Poppins', sans-serif;\
+            background: white;\
+            min-height: 100vh;\
+            color: #333;\
+            padding: 20px;\
+        \}\
+        \
+        .container \{\
+            max-width: 1200px;\
+            margin: 0 auto;\
+        \}\
+        \
+        .search-section \{\
+            background: white;\
+            border: 1.5px solid #FFB400;\
+            border-radius: 5px;\
+            padding: 30px;\
+            margin-bottom: 30px;\
+        \}\
+        \
+        .search-bar \{\
+            display: flex;\
+            gap: 15px;\
+            margin-bottom: 20px;\
+        \}\
+        \
+        .search-input \{\
+            flex: 1;\
+            padding: 15px 20px;\
+            border: 1.5px solid #FFB400;\
+            border-radius: 5px;\
+            font-size: 1rem;\
+            font-family: 'Poppins', sans-serif;\
+            transition: border-color 0.3s ease;\
+        \}\
+        \
+        .search-input:focus \{\
+            outline: none;\
+            border-color: #333;\
+        \}\
+        \
+        .search-button \{\
+            padding: 15px 30px;\
+            background: #FFB400;\
+            color: white;\
+            border: 2px solid rgba(40, 40, 40, 0.2);\
+            border-radius: 5px;\
+            cursor: pointer;\
+            font-weight: bold;\
+            font-family: 'Poppins', sans-serif;\
+            transition: all 0.3s ease;\
+        \}\
+        \
+        .search-button:hover \{\
+            background: #CF9200;\
+            border-color: rgba(40, 40, 40, 0.3);\
+        \}\
+        \
+        .category-filters \{\
+            display: flex;\
+            gap: 10px;\
+            flex-wrap: wrap;\
+        \}\
+        \
+        .filter-btn \{\
+            padding: 10px 20px;\
+            background: white;\
+            border: 1.5px solid #FFB400;\
+            border-radius: 5px;\
+            cursor: pointer;\
+            transition: all 0.3s ease;\
+            font-size: 0.9rem;\
+            font-family: 'Poppins', sans-serif;\
+            color: #333;\
+        \}\
+        \
+        .filter-btn.active,\
+        .filter-btn:hover \{\
+            background: #FFB400;\
+            color: #333;\
+        \}\
+        \
+        .products-grid \{\
+            display: grid;\
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\
+            gap: 25px;\
+            margin-bottom: 40px;\
+        \}\
+        \
+        .category-card \{\
+            background: white;\
+            border-radius: 5px;\
+            padding: 30px;\
+            transition: all 0.3s ease;\
+            cursor: pointer;\
+            border: 1.5px solid #FFB400;\
+        \}\
+        \
+        .category-card:hover \{\
+            transform: translateY(-5px);\
+        \}\
+        \
+        .category-header \{\
+            display: flex;\
+            justify-content: space-between;\
+            align-items: center;\
+            margin-bottom: 20px;\
+        \}\
+        \
+        .category-title \{\
+            font-size: 1.5rem;\
+            font-weight: 600;\
+            color: #333;\
+            border-bottom: 1.5px solid #FFB400;\
+            padding-bottom: 10px;\
+            margin-bottom: 15px;\
+        \}\
+        \
+        .product-count \{\
+            background: #FFB400;\
+            color: #333;\
+            padding: 5px 12px;\
+            border-radius: 5px;\
+            font-size: 0.8rem;\
+            font-weight: 600;\
+        \}\
+        \
+        .product-list \{\
+            list-style: none;\
+        \}\
+        \
+        .product-item \{\
+            padding: 15px;\
+            margin: 10px 0;\
+            background: rgba(255, 180, 0, 0.1);\
+            border-left: 4px solid #FFB400;\
+            border-radius: 5px;\
+            transition: all 0.3s ease;\
+            cursor: pointer;\
+        \}\
+        \
+        .product-item:hover \{\
+            background: rgba(255, 180, 0, 0.2);\
+            transform: translateX(5px);\
+        \}\
+        \
+        .product-name \{\
+            font-weight: 600;\
+            color: #333;\
+            margin-bottom: 5px;\
+        \}\
+        \
+        .product-capacity \{\
+            color: #666;\
+            font-size: 0.9rem;\
+        \}\
+        \
+        /* Contact Section with exact background from app */\
+        .contact-section \{\
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);\
+            border-radius: 5px;\
+            padding: 60px 40px;\
+            margin-top: 30px;\
+            position: relative;\
+            overflow: hidden;\
+        \}\
+        \
+        .contact-section::before \{\
+            content: '';\
+            position: absolute;\
+            top: 0;\
+            left: 0;\
+            right: 0;\
+            bottom: 0;\
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),\
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),\
+                        radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.1) 0%, transparent 50%);\
+        \}\
+        \
+        .contact-content \{\
+            position: relative;\
+            z-index: 1;\
+        \}\
+        \
+        .contact-title \{\
+            font-size: 2.8rem;\
+            font-weight: 700;\
+            text-align: center;\
+            margin-bottom: 20px;\
+            color: #1a202c;\
+            background: linear-gradient(135deg, #2d3748, #1a202c);\
+            -webkit-background-clip: text;\
+            -webkit-text-fill-color: transparent;\
+            background-clip: text;\
+        \}\
+        \
+        .contact-subtitle \{\
+            text-align: center;\
+            font-size: 1.2rem;\
+            color: #4a5568;\
+            margin-bottom: 40px;\
+        \}\
+        \
+        .contact-grid \{\
+            display: grid;\
+            grid-template-columns: 1fr 1fr;\
+            gap: 50px;\
+            align-items: start;\
+        \}\
+        \
+        .contact-info \{\
+            background: rgba(255, 255, 255, 0.8);\
+            backdrop-filter: blur(10px);\
+            border-radius: 5px;\
+            padding: 30px;\
+            border: 1px solid rgba(255, 255, 255, 0.2);\
+        \}\
+        \
+        .contact-info h3 \{\
+            font-size: 1.5rem;\
+            color: #2d3748;\
+            margin-bottom: 25px;\
+            font-weight: 600;\
+        \}\
+        \
+        .contact-item \{\
+            margin: 25px 0;\
+            padding: 15px;\
+            background: rgba(255, 180, 0, 0.05);\
+            border-radius: 5px;\
+            border-left: 3px solid #FFB400;\
+        \}\
+        \
+        .contact-item strong \{\
+            color: #2d3748;\
+            display: block;\
+            margin-bottom: 5px;\
+            font-weight: 600;\
+        \}\
+        \
+        .contact-item p \{\
+            margin: 2px 0;\
+            color: #4a5568;\
+        \}\
+        \
+        .contact-form \{\
+            background: rgba(255, 255, 255, 0.9);\
+            backdrop-filter: blur(10px);\
+            border-radius: 5px;\
+            padding: 30px;\
+            border: 1px solid rgba(255, 255, 255, 0.3);\
+            display: grid;\
+            gap: 20px;\
+        \}\
+        \
+        .form-group \{\
+            display: flex;\
+            flex-direction: column;\
+        \}\
+        \
+        .form-label \{\
+            margin-bottom: 8px;\
+            font-weight: 600;\
+            color: #2d3748;\
+        \}\
+        \
+        .form-input,\
+        .form-select,\
+        .form-textarea \{\
+            padding: 12px 15px;\
+            border: 1.5px solid rgba(255, 180, 0, 0.3);\
+            border-radius: 5px;\
+            font-size: 1rem;\
+            font-family: 'Poppins', sans-serif;\
+            transition: all 0.3s ease;\
+            background: rgba(255, 255, 255, 0.8);\
+        \}\
+        \
+        .form-input:focus,\
+        .form-select:focus,\
+        .form-textarea:focus \{\
+            outline: none;\
+            border-color: #FFB400;\
+            background: white;\
+            box-shadow: 0 0 0 3px rgba(255, 180, 0, 0.1);\
+        \}\
+        \
+        .submit-button \{\
+            padding: 15px 30px;\
+            background: linear-gradient(135deg, #FFB400, #e6a200);\
+            color: #333;\
+            border: none;\
+            border-radius: 5px;\
+            cursor: pointer;\
+            font-weight: 600;\
+            font-size: 1.1rem;\
+            font-family: 'Poppins', sans-serif;\
+            transition: all 0.3s ease;\
+            box-shadow: 0 4px 15px rgba(255, 180, 0, 0.3);\
+        \}\
+        \
+        .submit-button:hover \{\
+            transform: translateY(-2px);\
+            box-shadow: 0 6px 20px rgba(255, 180, 0, 0.4);\
+        \}\
+        \
+        /* Modal Styles - Horizontal 999px x 550px */\
+        .modal \{\
+            display: none;\
+            position: fixed;\
+            z-index: 1000;\
+            left: 0;\
+            top: 0;\
+            width: 100%;\
+            height: 100%;\
+            background-color: rgba(0,0,0,0.5);\
+            animation: fadeIn 0.3s ease;\
+        \}\
+        \
+        .modal-content \{\
+            background-color: white;\
+            margin: 5% auto;\
+            padding: 0;\
+            border: 1.5px solid #FFB400;\
+            border-radius: 5px;\
+            width: 999px;\
+            height: 550px;\
+            position: relative;\
+            animation: slideIn 0.3s ease;\
+            overflow: hidden;\
+            display: flex;\
+            flex-direction: row;\
+        \}\
+        \
+        .modal-left \{\
+            flex: 1;\
+            padding: 30px;\
+            overflow-y: auto;\
+        \}\
+        \
+        .modal-right \{\
+            width: 350px;\
+            background: rgba(255, 180, 0, 0.05);\
+            border-left: 1.5px solid #FFB400;\
+            padding: 30px;\
+            overflow-y: auto;\
+        \}\
+        \
+        .close \{\
+            color: #FFB400;\
+            position: absolute;\
+            right: 20px;\
+            top: 15px;\
+            font-size: 28px;\
+            font-weight: bold;\
+            cursor: pointer;\
+            z-index: 10;\
+        \}\
+        \
+        .close:hover \{\
+            color: #e6a200;\
+        \}\
+        \
+        .modal h2 \{\
+            color: #333;\
+            border-bottom: 1.5px solid #FFB400;\
+            padding-bottom: 10px;\
+            margin-bottom: 20px;\
+            font-weight: 600;\
+            font-size: 1.8rem;\
+        \}\
+        \
+        .modal-section \{\
+            margin-bottom: 25px;\
+        \}\
+        \
+        .modal-section h3 \{\
+            color: #FFB400;\
+            margin-bottom: 10px;\
+            font-weight: 600;\
+        \}\
+        \
+        .spec-grid \{\
+            display: grid;\
+            grid-template-columns: 1fr 1fr;\
+            gap: 10px;\
+            margin: 15px 0;\
+        \}\
+        \
+        .spec-item \{\
+            background: rgba(255, 180, 0, 0.1);\
+            padding: 8px 12px;\
+            border-radius: 5px;\
+            border-left: 1.5px solid #FFB400;\
+            font-size: 0.9rem;\
+        \}\
+        \
+        /* Images and Videos Section */\
+        .media-section \{\
+            margin-top: 20px;\
+            margin-bottom: 15px;\
+        \}\
+        \
+        .media-grid \{\
+            display: grid;\
+            grid-template-columns: 1fr 1fr;\
+            gap: 10px;\
+            margin: 10px 0;\
+        \}\
+        \
+        .media-item \{\
+            border: 1.5px solid #FFB400;\
+            border-radius: 5px;\
+            overflow: hidden;\
+            background: rgba(255, 180, 0, 0.1);\
+            padding: 8px;\
+            text-align: center;\
+            cursor: pointer;\
+            transition: all 0.3s ease;\
+        \}\
+        \
+        .media-item:hover \{\
+            background: rgba(255, 180, 0, 0.2);\
+            transform: translateY(-3px);\
+        \}\
+        \
+        .media-placeholder \{\
+            width: 100%;\
+            height: 80px;\
+            background: rgba(255, 180, 0, 0.2);\
+            border: 1.5px dashed #FFB400;\
+            border-radius: 5px;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+            color: #FFB400;\
+            font-weight: 600;\
+            margin-bottom: 5px;\
+            font-size: 0.8rem;\
+        \}\
+        \
+        .media-caption \{\
+            font-size: 0.8rem;\
+            color: #333;\
+            font-weight: 500;\
+        \}\
+        \
+        .no-results \{\
+            text-align: center;\
+            padding: 40px;\
+            color: #666;\
+            font-size: 1.2rem;\
+        \}\
+        \
+        @keyframes fadeIn \{\
+            from \{ opacity: 0; \}\
+            to \{ opacity: 1; \}\
+        \}\
+        \
+        @keyframes slideIn \{\
+            from \{ transform: translateY(-50px); opacity: 0; \}\
+            to \{ transform: translateY(0); opacity: 1; \}\
+        \}\
+        \
+        @media (max-width: 768px) \{\
+            .search-bar \{\
+                flex-direction: column;\
+            \}\
+            \
+            .contact-grid \{\
+                grid-template-columns: 1fr;\
+                gap: 30px;\
+            \}\
+            \
+            .contact-title \{\
+                font-size: 2.2rem;\
+            \}\
+            \
+            .contact-section \{\
+                padding: 40px 20px;\
+            \}\
+            \
+            .modal-content \{\
+                width: 95%;\
+                height: 80vh;\
+                flex-direction: column;\
+            \}\
+            \
+            .modal-right \{\
+                width: 100%;\
+                border-left: none;\
+                border-top: 1.5px solid #FFB400;\
+            \}\
+            \
+            .spec-grid \{\
+                grid-template-columns: 1fr;\
+            \}\
+            \
+            .media-grid \{\
+                grid-template-columns: 1fr;\
+            \}\
+        \}\
+    </style>\
+</head>\
+<body>\
+    <div class="container">\
+        <!-- Search Section -->\
+        <div class="search-section">\
+            <div class="search-bar">\
+                <input type="text" class="search-input" placeholder="Search products, categories, or specifications..." id="searchInput">\
+                <button class="search-button" onclick="searchProducts()">Search</button>\
+            </div>\
+            \
+            <div class="category-filters" id="categoryFilters">\
+                <!-- Filters will be loaded dynamically -->\
+            </div>\
+        </div>\
+\
+        <!-- Product Categories Grid -->\
+        <div class="products-grid" id="productsGrid">\
+            <!-- Categories will be loaded dynamically -->\
+        </div>\
+\
+        <!-- No Results Message -->\
+        <div id="noResults" class="no-results" style="display: none;">\
+            No products found matching your search criteria.\
+        </div>\
+\
+        <!-- Contact Section -->\
+        <div class="contact-section">\
+            <div class="contact-content">\
+                <h2 class="contact-title">Get in Touch</h2>\
+                <p class="contact-subtitle">Ready to transform your supply chain with sustainable materials?</p>\
+                \
+                <div class="contact-grid">\
+                    <div class="contact-info">\
+                        <h3>Contact Information</h3>\
+                        <div class="contact-item">\
+                            <strong>Sales & Inquiries</strong>\
+                            <p>sales@commoditytrading.com</p>\
+                            <p>+91-11-2345-6789</p>\
+                        </div>\
+                        <div class="contact-item">\
+                            <strong>Technical Support</strong>\
+                            <p>technical@commoditytrading.com</p>\
+                            <p>+91-11-2345-6790</p>\
+                        </div>\
+                        <div class="contact-item">\
+                            <strong>R&D Partnerships</strong>\
+                            <p>innovation@commoditytrading.com</p>\
+                            <p>+91-11-2345-6791</p>\
+                        </div>\
+                    </div>\
+                    \
+                    <form class="contact-form" onsubmit="submitForm(event)">\
+                        <div class="form-group">\
+                            <label class="form-label">Company Name</label>\
+                            <input type="text" class="form-input" name="company" required>\
+                        </div>\
+                        <div class="form-group">\
+                            <label class="form-label">Contact Person</label>\
+                            <input type="text" class="form-input" name="contact" required>\
+                        </div>\
+                        <div class="form-group">\
+                            <label class="form-label">Email</label>\
+                            <input type="email" class="form-input" name="email" required>\
+                        </div>\
+                        <div class="form-group">\
+                            <label class="form-label">Interest Area</label>\
+                            <select class="form-select" name="interest" required>\
+                                <option value="">Select Category</option>\
+                                <!-- Options will be loaded dynamically -->\
+                            </select>\
+                        </div>\
+                        <div class="form-group">\
+                            <label class="form-label">Message</label>\
+                            <textarea class="form-textarea" rows="4" name="message" required></textarea>\
+                        </div>\
+                        <button type="submit" class="submit-button">Send Message</button>\
+                    </form>\
+                </div>\
+            </div>\
+        </div>\
+    </div>\
+\
+    <!-- Product Modal - Horizontal Layout 999px x 550px -->\
+    <div id="productModal" class="modal">\
+        <div class="modal-content">\
+            <span class="close" onclick="closeModal()">&times;</span>\
+            <div class="modal-left" id="modalLeft"></div>\
+            <div class="modal-right" id="modalRight"></div>\
+        </div>\
+    </div>\
+\
+    <script>\
+        // Frontend Data Manager - Read Only\
+        class FrontendDataManager \{\
+            constructor() \{\
+                this.loadData();\
+                this.render();\
+                this.initializeEventListeners();\
+            \}\
+\
+            loadData() \{\
+                // Load from localStorage (managed by backend)\
+                this.products = JSON.parse(localStorage.getItem('products') || '\{\}');\
+                this.categories = JSON.parse(localStorage.getItem('categories') || '\{\}');\
+                this.inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');\
+            \}\
+\
+            getVisibleProducts() \{\
+                return Object.values(this.products).filter(product => product.visible);\
+            \}\
+\
+            getVisibleCategories() \{\
+                return Object.values(this.categories).filter(category => category.visible);\
+            \}\
+\
+            getProductsByCategory(categoryId) \{\
+                return this.getVisibleProducts().filter(product => product.category === categoryId);\
+            \}\
+\
+            render() \{\
+                this.renderProducts();\
+                this.renderFilters();\
+                this.loadContactCategoryOptions();\
+            \}\
+\
+            renderProducts() \{\
+                const grid = document.getElementById('productsGrid');\
+                const categories = this.getVisibleCategories();\
+                \
+                grid.innerHTML = '';\
+\
+                categories.forEach(category => \{\
+                    const products = this.getProductsByCategory(category.id);\
+                    \
+                    if (products.length === 0) return; // Skip empty categories\
+                    \
+                    const categoryCard = document.createElement('div');\
+                    categoryCard.className = 'category-card';\
+                    categoryCard.setAttribute('data-category', category.id);\
+                    categoryCard.onclick = () => openCategory(category.id);\
+\
+                    categoryCard.innerHTML = `\
+                        <div class="category-header">\
+                            <h3 class="category-title">$\{category.name\}</h3>\
+                            <span class="product-count">$\{products.length\} products</span>\
+                        </div>\
+                        <p>$\{category.description\}</p>\
+                        <ul class="product-list">\
+                            $\{products.map(product => `\
+                                <li class="product-item" onclick="event.stopPropagation(); openProductModal('$\{product.id\}')">\
+                                    <div class="product-name">$\{product.title\}</div>\
+                                    <div class="product-capacity">Capacity: $\{product.capacity['Monthly Capacity'] || 'N/A'\}</div>\
+                                </li>\
+                            `).join('')\}\
+                        </ul>\
+                    `;\
+\
+                    grid.appendChild(categoryCard);\
+                \});\
+            \}\
+\
+            renderFilters() \{\
+                const filtersContainer = document.getElementById('categoryFilters');\
+                const categories = this.getVisibleCategories();\
+\
+                filtersContainer.innerHTML = `\
+                    <button class="filter-btn active" onclick="filterCategory('all')">All Categories</button>\
+                    $\{categories.map(category => `\
+                        <button class="filter-btn" onclick="filterCategory('$\{category.id\}')">$\{category.name\}</button>\
+                    `).join('')\}\
+                `;\
+            \}\
+\
+            loadContactCategoryOptions() \{\
+                const select = document.querySelector('.contact-form select[name="interest"]');\
+                const categories = this.getVisibleCategories();\
+\
+                select.innerHTML = `\
+                    <option value="">Select Category</option>\
+                    $\{categories.map(category => `\
+                        <option value="$\{category.id\}">$\{category.name\}</option>\
+                    `).join('')\}\
+                    <option value="custom">Custom Development</option>\
+                `;\
+            \}\
+\
+            addInquiry(inquiryData) \{\
+                // Add inquiry to localStorage for backend to process\
+                const inquiry = \{\
+                    id: Date.now(),\
+                    company: inquiryData.company,\
+                    contact: inquiryData.contact,\
+                    email: inquiryData.email,\
+                    interest: inquiryData.interest,\
+                    message: inquiryData.message,\
+                    date: new Date().toISOString(),\
+                    status: 'New'\
+                \};\
+                this.inquiries.push(inquiry);\
+                localStorage.setItem('inquiries', JSON.stringify(this.inquiries));\
+            \}\
+\
+            initializeEventListeners() \{\
+                // Listen for storage changes from backend\
+                window.addEventListener('storage', (e) => \{\
+                    if (e.key === 'products' || e.key === 'categories') \{\
+                        this.loadData();\
+                        this.render();\
+                    \}\
+                \});\
+\
+                // Real-time search\
+                document.getElementById('searchInput').addEventListener('input', (e) => \{\
+                    if (e.target.value.length > 0) \{\
+                        searchProducts();\
+                    \} else \{\
+                        document.querySelectorAll('.category-card').forEach(card => \{\
+                            card.style.display = 'block';\
+                        \});\
+                        document.getElementById('noResults').style.display = 'none';\
+                    \}\
+                \});\
+\
+                // Enter key search\
+                document.getElementById('searchInput').addEventListener('keypress', (e) => \{\
+                    if (e.key === 'Enter') \{\
+                        searchProducts();\
+                    \}\
+                \});\
+\
+                // Close modal when clicking outside\
+                window.onclick = (event) => \{\
+                    const modal = document.getElementById('productModal');\
+                    if (event.target === modal) \{\
+                        modal.style.display = 'none';\
+                    \}\
+                \}\
+            \}\
+        \}\
+\
+        // Initialize frontend data manager\
+        const frontendManager = new FrontendDataManager();\
+\
+        // Frontend Functions\
+        function searchProducts() \{\
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();\
+            const cards = document.querySelectorAll('.category-card');\
+            const noResults = document.getElementById('noResults');\
+            let hasResults = false;\
+            \
+            cards.forEach(card => \{\
+                const text = card.textContent.toLowerCase();\
+                if (text.includes(searchTerm) || searchTerm === '') \{\
+                    card.style.display = 'block';\
+                    card.style.animation = 'fadeIn 0.5s ease';\
+                    hasResults = true;\
+                \} else \{\
+                    card.style.display = 'none';\
+                \}\
+            \});\
+\
+            noResults.style.display = hasResults ? 'none' : 'block';\
+        \}\
+\
+        function filterCategory(category) \{\
+            const cards = document.querySelectorAll('.category-card');\
+            const filterBtns = document.querySelectorAll('.filter-btn');\
+            const noResults = document.getElementById('noResults');\
+            let hasResults = false;\
+            \
+            // Update active filter button\
+            filterBtns.forEach(btn => btn.classList.remove('active'));\
+            event.target.classList.add('active');\
+            \
+            // Show/hide cards\
+            cards.forEach(card => \{\
+                if (category === 'all' || card.dataset.category === category) \{\
+                    card.style.display = 'block';\
+                    card.style.animation = 'fadeIn 0.5s ease';\
+                    hasResults = true;\
+                \} else \{\
+                    card.style.display = 'none';\
+                \}\
+            \});\
+\
+            noResults.style.display = hasResults ? 'none' : 'block';\
+            \
+            // Clear search input when filtering\
+            document.getElementById('searchInput').value = '';\
+        \}\
+\
+        function openProductModal(productId) \{\
+            const product = frontendManager.products[productId];\
+            if (!product) return;\
+\
+            const modalLeft = document.getElementById('modalLeft');\
+            const modalRight = document.getElementById('modalRight');\
+            \
+            modalLeft.innerHTML = `\
+                <h2>$\{product.title\}</h2>\
+                \
+                <div class="modal-section">\
+                    <h3>Product Overview</h3>\
+                    <p>$\{product.overview\}</p>\
+                </div>\
+                \
+                <div class="modal-section">\
+                    <h3>Technical Specifications</h3>\
+                    <div class="spec-grid">\
+                        $\{Object.entries(product.specifications).slice(0, 8).map(([key, value]) => \
+                            `<div class="spec-item">\
+                                <strong>$\{key\}:</strong> $\{value\}\
+                            </div>`\
+                        ).join('')\}\
+                    </div>\
+                </div>\
+                \
+                <div class="modal-section">\
+                    <h3>Applications</h3>\
+                    <ul>\
+                        $\{product.applications.map(app => `<li>$\{app\}</li>`).join('')\}\
+                    </ul>\
+                </div>\
+            `;\
+\
+            modalRight.innerHTML = `\
+                <div class="modal-section">\
+                    <h3>Production Capacity & Pricing</h3>\
+                    <div class="spec-grid">\
+                        $\{Object.entries(product.capacity).map(([key, value]) => \
+                            `<div class="spec-item">\
+                                <strong>$\{key\}:</strong> $\{value\}\
+                            </div>`\
+                        ).join('')\}\
+                    </div>\
+                </div>\
+\
+                <div class="media-section">\
+                    <h3>Product Images & Videos</h3>\
+                    <div class="media-grid">\
+                        <div class="media-item" onclick="openMedia('product-image', '$\{productId\}')">\
+                            <div class="media-placeholder">Product Image</div>\
+                            <div class="media-caption">$\{product.title.split(' ').slice(0, 2).join(' ')\}</div>\
+                        </div>\
+                        <div class="media-item" onclick="openMedia('process-video', '$\{productId\}')">\
+                            <div class="media-placeholder">Process Video</div>\
+                            <div class="media-caption">Production</div>\
+                        </div>\
+                        <div class="media-item" onclick="openMedia('quality-charts', '$\{productId\}')">\
+                            <div class="media-placeholder">Quality Charts</div>\
+                            <div class="media-caption">Analysis</div>\
+                        </div>\
+                        <div class="media-item" onclick="openMedia('certificates', '$\{productId\}')">\
+                            <div class="media-placeholder">Certificates</div>\
+                            <div class="media-caption">Quality Docs</div>\
+                        </div>\
+                    </div>\
+                </div>\
+                \
+                <div class="modal-section">\
+                    <h3>Quality Assurance</h3>\
+                    <p>Rigorous testing and quality certificates provided with each shipment.</p>\
+                </div>\
+            `;\
+            \
+            document.getElementById('productModal').style.display = 'block';\
+        \}\
+\
+        function openMedia(type, productId) \{\
+            alert(`Opening $\{type\} for $\{productId\}. In a full implementation, this would display actual media content.`);\
+        \}\
+\
+        function closeModal() \{\
+            document.getElementById('productModal').style.display = 'none';\
+        \}\
+\
+        function openCategory(category) \{\
+            console.log(`Opening $\{category\} category page`);\
+        \}\
+\
+        function submitForm(event) \{\
+            event.preventDefault();\
+            const formData = new FormData(event.target);\
+            \
+            const inquiryData = \{\
+                company: formData.get('company'),\
+                contact: formData.get('contact'),\
+                email: formData.get('email'),\
+                interest: formData.get('interest'),\
+                message: formData.get('message')\
+            \};\
+            \
+            frontendManager.addInquiry(inquiryData);\
+            \
+            alert('Thank you for your message! We will contact you soon.');\
+            event.target.reset();\
+        \}\
+\
+        // Initialize page\
+        document.addEventListener('DOMContentLoaded', function() \{\
+            // Add entrance animations\
+            const cards = document.querySelectorAll('.category-card');\
+            cards.forEach((card, index) => \{\
+                card.style.animation = `fadeIn 0.6s ease $\{index * 0.1\}s both`;\
+            \});\
+        \});\
+    </script>\
+</body>\
+</html>\
+}
